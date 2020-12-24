@@ -1,0 +1,13 @@
+[ 
+    {
+        "NOME" : "admin",
+        "COGNOME": "admin",
+        "SESSO": "m",
+        "DATANASCITA" : "01/01/2001",
+        "LOCALITA" : "fossano",
+        "MAIL" : "admin@vallauri.edu",
+        "PASSWORD":"admin",
+		"FOTO" : "",
+        "SALDOACCOUNT" : "200"  
+    }
+]
