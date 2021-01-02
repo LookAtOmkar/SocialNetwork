@@ -8,18 +8,18 @@ $(document).ready(function(){
     $("#signIn").on("click",function(){
         your_email=$("#your_email").val();
         your_pass=$("#your_pass").val();    
-        let request=inviaRichiesta("GET","/api/login",{"mail":your_email,"password":your_pass});
+        let request=inviaRichiesta("POST","/api/login",{"mail":your_email,"password":your_pass});
+        request.fail(errore);      
         request.done(function(data)
         {
             alert("Loggato "+data);
-            if(data[0]["Ris"] == "ok")
+            console.log(data);
+            if(data["Ris"] == "ok")
             {
                 alert("ok");
-                window.location.href = "./static/index.html"; 
+                localStorage.setItem("token","ok");
+                window.location.href = "../index.html"; 
             }
-
-        });
-        request.fail(errore);        
+        });  
     })
-
 });

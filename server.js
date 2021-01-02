@@ -5,13 +5,12 @@ const PORT = 1337;
 const express = require("express");
 const app = express();
 const fs= require("fs");
-const dispatcher = require("dispatcher");
-const HEADERS = require("headers");
-const ObjectID = mongo.ObjectID;
+const bodyParser = require("body-parser");
 
 let mongo = require("mongodb");
 const { allowedNodeEnvironmentFlags } = require('process');
 let mongoClient = mongo.MongoClient;
+const ObjectID = mongo.ObjectID;
 const CONNECTIONSTRING = "mongodb://127.0.0.1:27017";
 // const CONNECTIONOPTIONS = {useNewUrlParser: true, useUnifiedTopology: true};
 const CONNECTIONOPTIONS = {useNewUrlParser: true, useUnifiedTopology: true};
@@ -48,15 +47,43 @@ app.use('/', function (req, res, next)
     next();
 });
 
+//Route relativa alle risorse statiche
+app.use('/', express.static("./static"));
+app.use('/',express.static("./static/Login"));
+
+
+
+//Route di lettura dei parametri post
+app.use(bodyParser.urlencoded({"extended": true}));
+app.use(bodyParser.json());
+
+//Log dei parametri
+app.use("/", function (req, res, next)
+{
+    if (Object.keys(req.query).length > 0)
+    {
+        console.log("Parametri GET: " + JSON.stringify(req.query));
+    }
+    if (Object.keys(req.body).length > 0)
+    {
+        console.log("Parametri BODY: " + JSON.stringify(req.body));
+    }
+    next();
+});
+
+
+//Route per fare in modo che il server risponda a qualunque richiesta anche extra-domain.
+app.use("/", function (req, res, next)
+{
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    next();
+})
 
 
 //Route Specifiche
 
-
-
-
 //LOGIN
-app.get("/api/login",function(req,res,next){
+app.post("/api/login",function(req,res,next){
 
     let mail = req.body.mail;
     let password = req.body.password;
@@ -69,9 +96,9 @@ app.get("/api/login",function(req,res,next){
         else
         {
             let db = client.db("Ecoin");
-            let collection = db.collection("Ecoin"); 
+            let collection = db.collection("utente"); 
             //Verificare che email e password corrispondono a quelli presenti sul database
-            collection.find({$and:[{"MAIL":mail},{"PASSWORD":password}]}).toArray(function(err,data){
+            collection.find({$and:[{"mail":mail},{"password":password}]}).toArray(function(err,data){
                 if(err)
                 {
                     res.status(500).send("Login Fallito");
@@ -84,39 +111,11 @@ app.get("/api/login",function(req,res,next){
             })
         }
     });
-
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//Route di lettura dei parametri post
-//app.use(bodyParser.urlencoded({"extended": true}));
-//app.use(bodyParser.json());
-
-//Route relativa alle risorse statiche
-app.use('/', express.static("./static"));
-
-//Route per fare in modo che il server risponda a qualunque richiesta anche extra-domain.
-app.use("/", function (req, res, next)
-{
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    next();
 })
 
 
 /********** Route di gestione degli errori **********/
+
 
 app.use("/", function (req, res, next)
 {
@@ -132,6 +131,7 @@ app.use("/", function (req, res, next)
         res.send(paginaErrore);
     }
 });
+
 
 app.use(function (err, req, res, next)
 {

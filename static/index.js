@@ -3,5 +3,6 @@
 
 $(document).ready(function(){
 
-    window.location.href = "./Login/login.html"; 
+    if(localStorage.getItem("token")!="ok")
+    {  window.location.href = "./Login/login.html"; }
 })
