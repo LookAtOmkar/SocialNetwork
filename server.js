@@ -6,17 +6,14 @@ const express = require("express");
 const app = express();
 const fs= require("fs");
 const bodyParser = require("body-parser");
+const asyncc = require("async");
 
 let mongo = require("mongodb");
 const { allowedNodeEnvironmentFlags } = require('process');
 let mongoClient = mongo.MongoClient;
 const ObjectID = mongo.ObjectID;
 const CONNECTIONSTRING = "mongodb://127.0.0.1:27017";
-// const CONNECTIONOPTIONS = {useNewUrlParser: true, useUnifiedTopology: true};
 const CONNECTIONOPTIONS = {useNewUrlParser: true, useUnifiedTopology: true};
-
-
-
 
 let paginaErrore;
 
@@ -49,12 +46,8 @@ app.use('/', function (req, res, next)
 
 //Route relativa alle risorse statiche
 app.use('/', express.static("./static"));
-app.use('/',express.static("./static/Login"));
-
-
-
 //Route di lettura dei parametri post
-app.use(bodyParser.urlencoded({"extended": true}));
+app.use(bodyParser.urlencoded({"extended": false}));
 app.use(bodyParser.json());
 
 //Log dei parametri
@@ -79,11 +72,22 @@ app.use("/", function (req, res, next)
     next();
 })
 
+app.post("/",function (req, res, next) {
+    let pathName=url.parse(req.originalUrl).pathname;
+    fs.readFile("./static/"+pathName, function (err,data) {
+    if(err)
+        next();
+    else
+        res.send(data);
+    });
+});
+
 
 //Route Specifiche
 
+
 //LOGIN
-app.post("/api/login",function(req,res,next){
+app.post("/api/Login/login",function(req,res){
 
     let mail = req.body.mail;
     let password = req.body.password;
@@ -98,6 +102,7 @@ app.post("/api/login",function(req,res,next){
             let db = client.db("Ecoin");
             let collection = db.collection("utente"); 
             //Verificare che email e password corrispondono a quelli presenti sul database
+
             collection.find({$and:[{"mail":mail},{"password":password}]}).toArray(function(err,data){
                 if(err)
                 {
@@ -106,7 +111,9 @@ app.post("/api/login",function(req,res,next){
                 }
                 else
                 {
+
                     res.status(200).send({"Ris":"ok","data":data});
+                    client.close();
                 }
             })
         }

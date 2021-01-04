@@ -3,10 +3,11 @@
 
 <head>
     <meta charset="utf-8">
-    <title> Express</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> ECoins</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <link rel="stylesheet" href="index.css">
-
     <link rel ="application/javascript" href=https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js />
 
     <script type="application/javascript" src="jquery.js"></script>
@@ -16,6 +17,7 @@
 
 <body>
 
+    <!-----------------------------------------------NAVBAR--------------------------------------------------->
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
           <div class="navbar-header">
@@ -24,12 +26,10 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <div class="row ">
-              <a class="navbar-brand" href="#" id="Logo">Social Network   </a>
-            </div>
           </div>
           <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
+              <li class="nav navbar-brand " href="#" id="Logo"> ECoins   </li>
               <li class="active"><a href="#">Home</a></li>
               <li><a href="#">Messages</a></li>
             </ul>
@@ -49,126 +49,128 @@
           </div>
         </div>
       </nav>
-        
+    
+    <!-----------------------------------------------CONTENT-------------------------------------------------->
       <div class="container text-center">    
-        <div class="row">
-          <div class="col-sm-3 well">
-            <div class="well">
-              <p><a href="#">My Profile</a></p>
-              <img src="bird.jpg" class="img-circle" height="65" width="65" alt="Avatar">
+          <div class="row">
+            <div class="col-sm-3 well">
+              <div class="well">
+                <p><a href="#">My Profile</a></p>
+                <img src="bird.jpg" class="img-circle" height="65" width="65" alt="Avatar">
+              </div>
+              <div class="well">
+                <p><a href="#">Interests</a></p>
+                <p>
+                  <span class="label label-default">News</span>
+                  <span class="label label-primary">W3Schools</span>
+                  <span class="label label-success">Labels</span>
+                  <span class="label label-info">Football</span>
+                  <span class="label label-warning">Gaming</span>
+                  <span class="label label-danger">Friends</span>
+                </p>
+              </div>
+              <div class="alert alert-success fade in">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                <p><strong>Ey!</strong></p>
+                People are looking at your profile. Find out who.
+              </div>
+              <p><a href="#">Link</a></p>
+              <p><a href="#">Link</a></p>
+              <p><a href="#">Link</a></p>
             </div>
-            <div class="well">
-              <p><a href="#">Interests</a></p>
-              <p>
-                <span class="label label-default">News</span>
-                <span class="label label-primary">W3Schools</span>
-                <span class="label label-success">Labels</span>
-                <span class="label label-info">Football</span>
-                <span class="label label-warning">Gaming</span>
-                <span class="label label-danger">Friends</span>
-              </p>
-            </div>
-            <div class="alert alert-success fade in">
-              <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-              <p><strong>Ey!</strong></p>
-              People are looking at your profile. Find out who.
-            </div>
-            <p><a href="#">Link</a></p>
-            <p><a href="#">Link</a></p>
-            <p><a href="#">Link</a></p>
-          </div>
-          <div class="col-sm-7">
-          
-            <div class="container-fluid">
-              <div class="col-sm-12">
-                <div class="panel panel-default text-left">
-                  <div class="panel-body ">
-                    <p contenteditable="true">POST</p>
-                    <div class="col-sm-12" style="height: 150px; border: 1px solid black; margin:3px"></div>
-                    <div class="row navbar-right" style="margin:2px">
-                        <button type="button" class="btn btn-success btn-sm">
-                            <span class="glyphicon glyphicon-thumbs-up"></span> Like
-                          </button>
-                          <button class="btn btn-primary btn-sm"> PUBBLICA</button>     
+            <div class="col-sm-7">
+            
+              <div class="container-fluid">
+                <div class="col-sm-12">
+                  <div class="panel panel-default text-left">
+                    <div class="panel-body ">
+                      <p contenteditable="true">POST</p>
+                      <div class="col-sm-12" style="height: 150px; border: 1px solid black; margin:3px"></div>
+                      <div class="row navbar-right" style="margin:2px">
+                          <button type="button" class="btn btn-success btn-sm">
+                              <span class="glyphicon glyphicon-thumbs-up"></span> Like
+                            </button>
+                            <button class="btn btn-primary btn-sm"> PUBBLICA</button>     
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
+              
+              <div class="row">
+                <div class="col-sm-3">
+                  <div class="well">
+                  <p>John</p>
+                  <img src="bird.jpg" class="img-circle" height="55" width="55" alt="Avatar">
+                  </div>
+                </div>
+                <div class="col-sm-9">
+                  <div class="well">
+                    <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3">
+                  <div class="well">
+                  <p>Bo</p>
+                  <img src="bandmember.jpg" class="img-circle" height="55" width="55" alt="Avatar">
+                  </div>
+                </div>
+                <div class="col-sm-9">
+                  <div class="well">
+                    <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3">
+                  <div class="well">
+                  <p>Jane</p>
+                  <img src="bandmember.jpg" class="img-circle" height="55" width="55" alt="Avatar">
+                  </div>
+                </div>
+                <div class="col-sm-9">
+                  <div class="well">
+                    <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3">
+                  <div class="well">
+                  <p>Anja</p>
+                  <img src="bird.jpg" class="img-circle" height="55" width="55" alt="Avatar">
+                  </div>
+                </div>
+                <div class="col-sm-9">
+                  <div class="well">
+                    <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
+                  </div>
+                </div>
+              </div>     
             </div>
-            
-            <div class="row">
-              <div class="col-sm-3">
-                <div class="well">
-                 <p>John</p>
-                 <img src="bird.jpg" class="img-circle" height="55" width="55" alt="Avatar">
-                </div>
+            <div class="col-sm-2 well">
+              <div class="thumbnail">
+                <p>Upcoming Events:</p>
+                <img src="paris.jpg" alt="Paris" width="400" height="300">
+                <p><strong>Paris</strong></p>
+                <p>Fri. 27 November 2015</p>
+                <button class="btn btn-primary">Info</button>
+              </div>      
+              <div class="well">
+                <p>ADS</p>
               </div>
-              <div class="col-sm-9">
-                <div class="well">
-                  <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-3">
-                <div class="well">
-                 <p>Bo</p>
-                 <img src="bandmember.jpg" class="img-circle" height="55" width="55" alt="Avatar">
-                </div>
-              </div>
-              <div class="col-sm-9">
-                <div class="well">
-                  <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
-                </div>
+              <div class="well">
+                <p>ADS</p>
               </div>
             </div>
-            <div class="row">
-              <div class="col-sm-3">
-                <div class="well">
-                 <p>Jane</p>
-                 <img src="bandmember.jpg" class="img-circle" height="55" width="55" alt="Avatar">
-                </div>
-              </div>
-              <div class="col-sm-9">
-                <div class="well">
-                  <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-3">
-                <div class="well">
-                 <p>Anja</p>
-                 <img src="bird.jpg" class="img-circle" height="55" width="55" alt="Avatar">
-                </div>
-              </div>
-              <div class="col-sm-9">
-                <div class="well">
-                  <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
-                </div>
-              </div>
-            </div>     
           </div>
-          <div class="col-sm-2 well">
-            <div class="thumbnail">
-              <p>Upcoming Events:</p>
-              <img src="paris.jpg" alt="Paris" width="400" height="300">
-              <p><strong>Paris</strong></p>
-              <p>Fri. 27 November 2015</p>
-              <button class="btn btn-primary">Info</button>
-            </div>      
-            <div class="well">
-              <p>ADS</p>
-            </div>
-            <div class="well">
-              <p>ADS</p>
-            </div>
-          </div>
-        </div>
       </div>
-      
+    
+    <!-----------------------------------------------FOOTER--------------------------------------------------->
       <footer class="container-fluid text-center">
-        <p>Footer Text</p>
+        <p>Ecoins S.P.A  Founded by :  Omkar Singh Rathore & Darius Davidel</p>
       </footer>
 
 </body>
