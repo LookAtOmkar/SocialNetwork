@@ -6,11 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title> ECoins</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
     <link rel="stylesheet" href="index.css">
-    <link rel ="application/javascript" href=https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js />
-
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="application/javascript" src="jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script type="application/javascript" src="libreria.js"></script>
     <script type="application/javascript" src="index.js"></script>
 </head>
@@ -18,33 +20,38 @@
 <body>
 
     <!-----------------------------------------------NAVBAR--------------------------------------------------->
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-          </div>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark ">
+        <div class="container-fluid ml-3 mr-3">
+          <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#myNavbar">
+            <span class="navbar-toggler-icon icon-bar"></span>
+          </button>
           <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav mr-auto">
               <li class="nav navbar-brand " href="#" id="Logo"> ECoins   </li>
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#">Messages</a></li>
+              <li class="nav-item ">
+                <a class="nav-link active" href="#">Home</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link active" href="#">Messages</a>
+              </li>
             </ul>
-            <form class="navbar-form navbar-right" role="search">
-              <div class="form-group input-group">
-                <input type="text" class="form-control" placeholder="Search..">
-                <span class="input-group-btn">
-                  <button class="btn btn-default" type="button">
-                    <span class="glyphicon glyphicon-search"></span>
-                  </button>
-                </span>        
-              </div>
-            </form>
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="#"><span class="glyphicon glyphicon-user"></span> My Account</a></li>
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item dropdown" id="MyAccount">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown">
+                  <span class="glyphicon glyphicon-user"></span> My Account
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item active fas fa-user-alt" href="#">  My profile</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item fas fa-sign-out-alt" href="#">Exit</a>
+                </div>
+              </li>
+              <form class="form-inline nav-item   my-2 my-lg-0" role="search">
+                <div class="form-group input-group">
+                  <input type="text" class="form-control mr-sm-2" placeholder="Search.." aria-label="Search">
+                  <button class="btn btn-success" type="button">SEARCH</button>
+                </div>
+              </form>
             </ul>
           </div>
         </div>
@@ -52,21 +59,21 @@
     
     <!-----------------------------------------------CONTENT-------------------------------------------------->
       <div class="container text-center">    
-          <div class="row">
-            <div class="col-sm-3 well">
-              <div class="well">
+          <div class="row mt-3 mb-3">
+            <div class="col-sm-3 card">
+              <div class="jumbotron ">
                 <p><a href="#">My Profile</a></p>
-                <img src="bird.jpg" class="img-circle" height="65" width="65" alt="Avatar">
+                <img src="img/bandmember.jpg" class="img-circle" height="65" width="65" alt="Avatar">
               </div>
-              <div class="well">
+              <div class="jumbotron">
                 <p><a href="#">Interests</a></p>
                 <p>
-                  <span class="label label-default">News</span>
-                  <span class="label label-primary">W3Schools</span>
-                  <span class="label label-success">Labels</span>
-                  <span class="label label-info">Football</span>
-                  <span class="label label-warning">Gaming</span>
-                  <span class="label label-danger">Friends</span>
+                  <span class="badge badge-default">News</span>
+                  <span class="badge badge-primary">W3Schools</span>
+                  <span class="badge badge-success">Labels</span>
+                  <span class="badge badge-info">Football</span>
+                  <span class="badge badge-warning">Gaming</span>
+                  <span class="badge badge-danger">Friends</span>
                 </p>
               </div>
               <div class="alert alert-success fade in">
@@ -79,89 +86,86 @@
               <p><a href="#">Link</a></p>
             </div>
             <div class="col-sm-7">
-            
               <div class="container-fluid">
                 <div class="col-sm-12">
                   <div class="panel panel-default text-left">
                     <div class="panel-body ">
-                      <p contenteditable="true">POST</p>
+                      <h4 contenteditable="false">POST</h4>
                       <div class="col-sm-12" style="height: 150px; border: 1px solid black; margin:3px"></div>
-                      <div class="row navbar-right" style="margin:2px">
-                          <button type="button" class="btn btn-success btn-sm">
-                              <span class="glyphicon glyphicon-thumbs-up"></span> Like
-                            </button>
-                            <button class="btn btn-primary btn-sm"> PUBBLICA</button>     
+                      <div class="row d-flex flex-row-reverse mr-auto">
+                        <button class="btn btn-primary btn-sm"> PUBBLICA</button>
+                        <button type="button" class="btn btn-success btn-sm fas fa-thumbs-up"></button>     
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
               
-              <div class="row">
-                <div class="col-sm-3">
-                  <div class="well">
+              <div class="row mt-4">
+                <div class="col-sm-3 ">
+                  <div class="card">
                   <p>John</p>
-                  <img src="bird.jpg" class="img-circle" height="55" width="55" alt="Avatar">
+                  <img src="img/bird.jpg" class=" mx-auto d-block rounded-circle" height="55" width="55" alt="Avatar">
                   </div>
                 </div>
                 <div class="col-sm-9">
-                  <div class="well">
+                  <div class="card">
                     <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-sm-3">
-                  <div class="well">
+                  <div class="card">
                   <p>Bo</p>
-                  <img src="bandmember.jpg" class="img-circle" height="55" width="55" alt="Avatar">
+                  <img src="img/bandmember.jpg" class="mx-auto d-block rounded-circle " height="55" width="55" alt="Avatar">
                   </div>
                 </div>
                 <div class="col-sm-9">
-                  <div class="well">
+                  <div class="card">
                     <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-sm-3">
-                  <div class="well">
+                  <div class="card">
                   <p>Jane</p>
-                  <img src="bandmember.jpg" class="img-circle" height="55" width="55" alt="Avatar">
+                  <img src="img/bandmember.jpg" class="mx-auto d-block rounded-circle" height="55" width="55" alt="Avatar">
                   </div>
                 </div>
                 <div class="col-sm-9">
-                  <div class="well">
+                  <div class="card">
                     <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-sm-3">
-                  <div class="well">
+                  <div class="card">
                   <p>Anja</p>
-                  <img src="bird.jpg" class="img-circle" height="55" width="55" alt="Avatar">
+                  <img src="img/bird.jpg" class="mx-auto d-block rounded-circle" height="55" width="55" alt="Avatar">
                   </div>
                 </div>
                 <div class="col-sm-9">
-                  <div class="well">
+                  <div class="card">
                     <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
                   </div>
                 </div>
               </div>     
             </div>
-            <div class="col-sm-2 well">
+            <div class="col-sm-2 card">
               <div class="thumbnail">
                 <p>Upcoming Events:</p>
-                <img src="paris.jpg" alt="Paris" width="400" height="300">
+                <img src="img/paris.jpg" class="img-thumbnail" alt="Paris" width="400" height="300">
                 <p><strong>Paris</strong></p>
                 <p>Fri. 27 November 2015</p>
                 <button class="btn btn-primary">Info</button>
               </div>      
-              <div class="well">
+              <div class="jumbotron">
                 <p>ADS</p>
               </div>
-              <div class="well">
+              <div class="jumbotron">
                 <p>ADS</p>
               </div>
             </div>

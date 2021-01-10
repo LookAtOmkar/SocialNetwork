@@ -83,7 +83,7 @@ app.post("/",function (req, res, next) {
 });
 
 
-//Route Specifiche
+//-------------------------------------------------Route Specifiche------------------------------------------------------------
 
 
 //LOGIN
@@ -103,7 +103,7 @@ app.post("/api/Login/login",function(req,res){
             let collection = db.collection("utente"); 
             //Verificare che email e password corrispondono a quelli presenti sul database
 
-            collection.find({$and:[{"mail":mail},{"password":password}]}).toArray(function(err,data){
+            collection.findOne({$and:[{"MAIL":mail},{"PASSWORD":password}]},function(err,data){
                 if(err)
                 {
                     res.status(500).send("Login Fallito");
@@ -111,14 +111,82 @@ app.post("/api/Login/login",function(req,res){
                 }
                 else
                 {
-
-                    res.status(200).send({"Ris":"ok","data":data});
-                    client.close();
+                    if(data==null)
+                    {
+                        res.status(401).send("Username o password invalido");
+                    }
+                    else
+                    {
+                        res.status(200).send({"Ris":"ok","utente":data["_id"]});
+                    }
                 }
+                client.close();
             })
         }
     });
 })
+
+//SIGNUP  
+app.post("/api/Login/Register",function(req,res){
+    //insert();
+    mongoClient.connect(CONNECTIONSTRING,CONNECTIONOPTIONS,function(err,client){
+        if(err)
+        {
+            res.status(503).send("Errore di connessione al DB");
+        }
+        else
+        {
+            let db = client.db("Ecoin");
+            let collection = db.collection("utente");
+            
+            collection.insertOne(req.body,function(err,data){
+                if(err)
+                {
+                    res.status(500).send("Errore di esecuzione query");
+                }
+                else
+                {
+                    res.status(200).send({"Res":"Done"});
+                    console.log(data);
+                }
+                client.close();
+            })
+        }
+    })
+})
+
+
+
+app.post("/api/getUserName",function(req,res){
+    mongoClient.connect(CONNECTIONSTRING,CONNECTIONOPTIONS,function(err,client){
+
+        if(err)
+        {
+            res.status(503).send("Errore di connessione al DB");
+        }
+        else
+        {
+            let db= client.db("Ecoin");
+            let collection = db.collection("utente");
+            let currentID=new ObjectID(req.body.ID);
+            collection.findOne({"_id":currentID},function(err,data){
+                if(err)
+                {
+                    res.status(500).send("Internal server error / Query Error");
+                }
+                else
+                {
+                    res.status(200).send({"Name": data["NOME"],"Surname":data["COGNOME"]});
+                }
+                client.close();
+            }) 
+        }
+
+    })
+
+
+
+});
 
 
 /********** Route di gestione degli errori **********/

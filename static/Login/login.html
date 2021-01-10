@@ -8,68 +8,104 @@
 
     <!-- Font Icon -->
     <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
-
     <!-- Main css -->
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    
     <script type="application/javascript" src="../jquery.js"></script> 
     <script type="application/javascript" src="js/libreria.js"></script>
     <script type="application/javascript" src="js/login.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
 </head>
 <body>
 
-    <div class="main" >
+    <div class="main " >
         <!-- Sign up form -->
-        <section class="signup">
-            <div class="container">
+            <div class="container col-xl-6" id="SIGNUP">
                 <div class="signup-content">
                     <div class="signup-form">
                         <h2 class="form-title">Sign up</h2>
-                        <form method="POST" class="register-form" id="register-form">
+                        <form method="POST" class="register-form" id="register-form" action="../index.html">
                             <div class="form-group">
                                 <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" name="name" id="name" placeholder="Nome"/>
+                                <input type="text" class="form-control" name="name" id="_name" placeholder="Nome" required />
+                                <div class="invalid-feedback">Inserisci il tuo nome</div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group has-validation">
                                 <label for="surname"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" name="surname" id="surname" placeholder="Cognome"/>
+                                <input type="text" class="form-control" name="surname" id="_surname" placeholder="Cognome" required />
+                                <div class="invalid-feedback">Inserisci il tuo cognome</div>
                             </div>
+
+                            <div class="form-group ">
+                                <div class="col-auto">
+                                    <label><i class="zmdi zmdi-male-female"></i></label>
+                                    <select class="custom-select mr-sm-12" id="ComboSesso">
+                                      <option selected value="M">Maschio</option>
+                                      <option value="F">Femmina</option>
+                                    </select>
+                                </div>
+                                <div class="invalid-feedback">Campo mancante</div>
+                            </div>
+
+                            <div class="form-group it-datepicker-wrapper">
+                                <label for="foto"><i class="zmdi zmdi-calendar"></i></label>
+                                <input class="form-control it-date-datepicker" id="date1" type="text" placeholder="inserisci la data di nascita">
+                                <div class="invalid-feedback">Data di nascita non valida</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="localita"><i class="zmdi zmdi-city"></i></label>
+                                <input type="text" class="form-control" name="localita" id="_localita" placeholder="Localita" required />
+                                <div class="invalid-feedback">Inserisci la tua  località</div>
+                            </div>
+                    
                             <div class="form-group">
                                 <label for="email"><i class="zmdi zmdi-email"></i></label>
-                                <input type="email" name="email" id="email" placeholder="Mail"/>
+                                <input type="email" class="form-control" name="email" id="_mail" placeholder="Mail" required />
+                                <div class="invalid-feedback">Mail non valido</div>
                             </div>
+
                             <div class="form-group">
                                 <label for="pass"><i class="zmdi zmdi-lock"></i></label>
-                                <input type="password"  id="pwd" placeholder="Password"/>
+                                <input type="password" class="form-control"  id="_pwd" placeholder="Password" required/>
+                                <div class="invalid-feedback">Inserisci una nuova password: Deve essere lunga massimo di 8 caratteri,inclusi numeri</div>
                             </div>
                             <div class="form-group">
                                 <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
-                                <input type="password" id="re_pwd" placeholder="Ripetere la password"/>
+                                <input type="password" class="form-control" id="_re_pwd" placeholder="Ripetere la password" required />
+                                <div class="invalid-feedback">Hai dimenticato di inserire nuovamente la password</div>
                             </div>
                             <div class="form-group">
-                                <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
-                                <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
+                                <input type="checkbox" name="agree-term" id="_agree-term" class="agree-term" />
+                                <label for="agree-term" class="form-control" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
                             </div>
                             <div class="form-group form-button">
-                                <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
+                                <input type="button" name="signup" id="signUp" class="form-submit" value="Register"/>
                             </div>
                         </form>
                     </div>
                     <div class="signup-image">
                         <figure><img src="images/signup-image.jpg" alt="sing up image"></figure>
-                        <a href="#" class="signup-image-link">I am already member</a>
+                        <a href="#LOGIN" class="signup-image-link">I am already member</a>
                     </div>
                 </div>
             </div>
-        </section>
 
+        <br>
+        <br>
         <!-- Sing in  Form -->
-        <section class="sign-in">
-            <div class="container">
+        <div class="container col-xl-6" id="LOGIN">
                 <div class="signin-content">
                     <div class="signin-image">
                         <figure><img src="images/signin-image.jpg" alt="sing up image"></figure>
-                        <a href="#" class="signup-image-link">Crea un account</a>
+                        <a href="#SIGNUP" class="signup-image-link">Crea un account</a>
                     </div>
 
                     <div class="signin-form">
@@ -94,8 +130,6 @@
                     </div>
                 </div>
             </div>
-        </section>
-
     </div>
 </body>
 </html>
