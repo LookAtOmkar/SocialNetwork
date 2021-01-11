@@ -11,7 +11,7 @@ $(document).ready(function(){
 
     $(".dropdown-toggle").dropdown();
     let UserID=localStorage.getItem("utente");
-    let request = inviaRichiesta("POST","/api/getUserName",{"ID":UserID});
+    /*let request = inviaRichiesta("POST","/api/getUserName",{"ID":UserID});
     request.fail(errore);
     request.done(function(data){
         if(data==null)
@@ -25,7 +25,8 @@ $(document).ready(function(){
             }
             $("#MyAccount").find("a").eq(0).html(Username);
         }
-    });
+        
+    });*/
 
 
     //VISUALIZZA PROFILO

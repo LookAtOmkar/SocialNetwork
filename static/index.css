@@ -4,3 +4,14 @@ footer {
     padding: 15px;
     height: 100%;
   }
+
+  .btnShopMonete {
+    transition-duration: 0.4s;
+    background-color: rgba(60, 255, 0, 0.274);
+    border: none;
+  }
+  
+  .btnShopMonete:hover {
+    background-color: #4CAF50; /* Green */
+    color: white;
+  }
