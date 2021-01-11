@@ -6,7 +6,6 @@ const express = require("express");
 const app = express();
 const fs= require("fs");
 const bodyParser = require("body-parser");
-const asyncc = require("async");
 
 let mongo = require("mongodb");
 const { allowedNodeEnvironmentFlags } = require('process');
