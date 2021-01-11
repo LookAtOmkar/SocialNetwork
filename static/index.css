@@ -15,3 +15,23 @@ footer {
     background-color: #4CAF50; /* Green */
     color: white;
   }
+
+  .btnAggiungiFoto {
+    transition-duration: 0.4s;
+    background-color: rgba(43, 140, 13, 0.782);
+    border: none;
+  }
+  
+  .btnAggiungiFoto:hover {
+    background-color: #25d82b; /* Green */
+    color: white;
+  }
+
+  .profileDB{
+    background-image:url(img/paris.jpg); /*esempio*/
+    height:250px;
+    border:5px double green;
+    background-size:contain;
+    background-repeat: none;
+    background-attachment:inherit;
+  }

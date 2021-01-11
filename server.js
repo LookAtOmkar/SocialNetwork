@@ -182,10 +182,12 @@ app.post("/api/getUserName",function(req,res){
         }
 
     })
-
-
-
 });
+
+app.get("/api/Profile",function(req,res){
+
+    //Ricevere dei dati per la visualizzazione profilo
+})
 
 
 /********** Route di gestione degli errori **********/
