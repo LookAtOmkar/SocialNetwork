@@ -28,9 +28,11 @@ $(document).ready(function(){
     });
 
 
+    //VISUALIZZA PROFILO
     $("#MyAccount").on("click",function(){  
     })
 
+    //EXIT
     $("#MyAccount").children().eq(1).children().eq(2).on("click",function(){
         localStorage.removeItem("token");
         localStorage.removeItem("utente");
