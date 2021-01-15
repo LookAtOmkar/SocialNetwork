@@ -3,21 +3,19 @@
 
 $(document).ready(function(){
 
-    if(localStorage.getItem("token")!="ok")
-    {  window.location.href = "./Login/login.html"; }
-
-
     //..........................................MY ACCOUNT.........................................
 
     $(".dropdown-toggle").dropdown();
-    let UserID=localStorage.getItem("utente");
-    let request = inviaRichiesta("POST","/api/getUserName",{"ID":UserID});
+    
+    
+    let request = inviaRichiesta("GET","/api/getUserName");
     request.fail(errore);
     request.done(function(data){
         if(data==null)
             alert("ERRORE DATI");
         else
         {
+            console.log(data);
             let Username = data["Name"]+" "+data["Surname"];
             if(data["Name"]=="admin") //PERCHE' COME COGNOME E' SEMPRE admin , QUINDI BASTA CHE VERRA' SCRITTO UNA VOLTA SOLA
             {
@@ -29,23 +27,53 @@ $(document).ready(function(){
     });
 
 
+    let MYProfile_modal_body = $("#myProfile").find(".modal-body .card");
 
     //VISUALIZZA PROFILO
-    /*
     $("#MyAccount").children().eq(1).children().eq(0).on("click",function(){  
-        let UserID = localStorage.getItem("utente");
-        let request= inviaRichiesta("GET","/api/Profile",{"_id":UserID});
+        let request= inviaRichiesta("GET","/api/Profile");
         request.fail(errore);
         request.done(function(data){
             console.log(data);
+            for(let item in data)
+            {
+                let content = $("<div>").addClass("d-flex flex-row");
+                let divHead = $("<div>").addClass("col-sm-3 border-bottom border-right");
+                let divBody = $("<div>").addClass("col-sm-9 border-bottom border-left");
+                if((item != "_id")&&(item != "FOTO"))
+                {
+                    $("<h6>").html(item).appendTo(divHead); //Title 
+                    $("<p>").html(data[item]).appendTo(divBody); //Detail
+                    $("<div>").addClass("fa fa-pencil").prop("method","patch").on("click",insertUpdate);
+                    $("<div>").addClass("far fa-trash-alt").prop("method","delete").on("click",remove);
+
+                }
+                divHead.appendTo(content);
+                divBody.appendTo(content);
+                content.appendTo(MYProfile_modal_body);
+            }
         });
     })
-    */
 
     //EXIT
     $("#MyAccount").children().eq(1).children().eq(2).on("click",function(){
-        localStorage.removeItem("token");
-        localStorage.removeItem("utente");
-        window.location.reload();
+        let request = inviaRichiesta("POST","/api/logout");
+        request.fail(errore);
+        request.done(function(data){
+            window.location.reload();
+        })
     })
+
+
+
+    //----------------------------------FUNCTIONS--------------------------------
+    function insertUpdate()
+    {
+
+    }
+
+    function remove()
+    {
+
+    }
 })

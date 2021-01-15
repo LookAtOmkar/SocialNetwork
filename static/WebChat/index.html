@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ecoin.Chat</title>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+	<script type="application/javascript"
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.1/socket.io.js"></script>
+
+	<script type="application/javascript" src="index.js"></script>
+
+	<style type="text/css">
+		h1 {
+			text-align: center
+		}
+
+		#wrapper {
+			height: 80%;
+			overflow: auto;
+			margin: 12px;
+			padding: 8px;
+			background-color: #fee;
+		}
+
+		/* queste classi sono usate dalla funzione visualizza() */
+		.message-container {
+			margin: 12px 0;
+			padding: 8px;
+			background-color: #f1eeee;
+		}
+
+		.message-data {
+			font-weight: bold;
+		}
+
+		.message-from {
+			font-style: italic;
+		}
+	</style>
+</head>
+
+<body>
+    <div class="container">
+		<h1>ECOIN-Chat</h1>
+
+		<div id="wrapper">
+			<!-- Qui verranno visualizzati i messaggi provenienti dagli utenti -->
+		</div>
+
+		<div class="row">
+			<div class="col-sm-6">
+				<input type="email" class="form-control" id="txtMessage" placeholder="Inserisci qui il tuo messaggio">
+			</div>
+			<div class="col-sm-6">
+				<button class="	btn btn-primary" id="btnInvia">Invia</button>
+				<button class="	btn btn-primary" id="btnDisconnetti">Disconnetti</button>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

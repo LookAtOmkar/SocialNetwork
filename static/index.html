@@ -13,7 +13,7 @@
     <script type="application/javascript" src="jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script type="application/javascript" src="libreria.js"></script>
+    <script type="text/javascript" src="libreria.js"></script>
     <script type="application/javascript" src="index.js"></script>
 </head>
 
@@ -32,7 +32,7 @@
                 <a class="nav-link active" href="#">Home</a>
               </li>
               <li class="nav-item active">
-                <a class="nav-link active" href="#">Messages</a>
+                <a class="nav-link active" href="./WebChat/index.html">Messages</a>
               </li>
             </ul>
             <ul class="navbar-nav ml-auto">
@@ -81,25 +81,8 @@
 
                   <!--Details-->
                   <div class="card">
-                    <div class="d-flex flex-row">
-                      <div class=" col-sm-3 border-bottom border-right">
-                        <h5>nome</h5>
-                      </div>
-                      <div class="col-sm-9 border-bottom border-left">
-                        <p>...............................</p>
-                      </div>
-                    </div>
-  
-                    <div class="d-flex flex-row">
-                      <div class=" col-sm-3 border-bottom border-right">
-                        <h5>cognome</h5>
-                      </div>
-                      <div class="col-sm-9 border-bottom border-left">
-                        <p>...............................</p>
-                      </div>
-                    </div>
-  
-                    <div class="d-flex flex-row">
+                    <!--
+                      <div class="d-flex flex-row">
                       <div class=" col-sm-3 border-bottom border-right">
                         <h5>mail</h5>
                       </div>
@@ -107,6 +90,7 @@
                         <p>...............................</p>
                       </div>
                     </div>
+                    -->
                   </div>
                 </div>
 
@@ -165,7 +149,9 @@
                   <div class="panel panel-default text-left">
                     <div class="panel-body ">
                       <h4 contenteditable="false">POST</h4>
-                      <div class="col-sm-12" style="height: 150px; border: 1px solid black; margin:3px"></div>
+                      <div class="col-sm-12" style="height: 150px; border: 1px solid black; margin:3px">
+                        <input type="text" style="height:130px; width: 100% ;"/>
+                      </div>
                       <div class="row d-flex flex-row-reverse mr-auto">
                         <button class="btn btn-primary btn-sm"> PUBBLICA</button>
                         <button type="button" class="btn btn-success btn-sm fas fa-thumbs-up"></button>     

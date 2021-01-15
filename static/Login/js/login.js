@@ -13,24 +13,54 @@ $(document).ready(function(){
 
     //..........................................................LOGIN..........................................................
     $("#signIn").on("click",function(){
+        LogIn();
+    })
+
+    $(document).on('keydown',function(event){
+        if(event.keyCode == 13)
+            LogIn();
+    })
+
+
+    function LogIn(){
+        $("#your_email").removeClass("is-invalid");
+        $("#your_pass").removeClass("is-invalid");
+        $("#your_email").addClass("is-valid");
+        $("#your_pass").addClass("is-valid");
+        
         your_email=$("#your_email").val();
         your_pwd=$("#your_pass").val();    
-        let request=inviaRichiesta("POST","/api/Login/login",{"mail":your_email,"password":your_pwd});
-        request.fail(errore);      
-        request.done(function(data)
+
+        if(your_email == "")
         {
-            alert("Loggato");
-            console.log(data);
-            if(data["Ris"] == "ok")
+            $("#your_email").addClass("is-invalid");
+            $("#your_email").removeClass("is-valid");
+        }
+        else if(your_pwd == "")
+        {
+            $("#your_pass").addClass("is-invalid");
+            $("#your_pass").removeClass("is-valid");
+        }
+        else
+        {
+            let request=inviaRichiesta("POST","/api/Login/login",{"mail":your_email,"password":your_pwd});
+            request.fail(errore);      
+            request.done(function(data)
             {
-                localStorage.setItem("token","ok");
-                localStorage.setItem("utente",data["utente"]);
-                window.location.href = "../index.html"; 
-            }
-            else
-                alert("Errore");
-        });  
-    })
+                alert("Loggato");
+                console.log(data);
+                if(data["Ris"] == "ok")
+                {
+                    //localStorage.setItem("token","ok");
+                    //localStorage.setItem("utente",data["utente"]);
+                    window.location.href = "../index.html"; 
+                }
+                else
+                    alert("Errore");
+            });  
+        }       
+    }
+
 
     //............................................................SIGN UP............................................................
 
@@ -43,7 +73,7 @@ $(document).ready(function(){
     })
     
     $("#_pwd").on("keydown",function(){
-        controllaLength($(this),5);
+        controllaLength($(this),8);
     })
 
     $("#_mail").on("keydown",function(){
@@ -96,7 +126,7 @@ $(document).ready(function(){
     //----------------------------------------------------FUNCTIONS--------------------------------------------------------
     function controllaLength(param,num)
     {
-        if(param.val().length>num)
+        if(param.val().length>=num)
         {
             param.removeClass("is-invalid");
             param.addClass("is-valid");
@@ -159,7 +189,7 @@ $(document).ready(function(){
         controllaMail($("#_mail")); 
 
         //PASSWORD
-        if(($("#_pwd").val()=="") || ($("#_pwd").val().length >5))
+        if(($("#_pwd").val()=="") || ($("#_pwd").val().length >8))
         {
             $("#_pwd").addClass("is-invalid");
         }
