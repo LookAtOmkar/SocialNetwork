@@ -360,6 +360,33 @@ app.get("/api/Profile",function(req,res){
     })
 })
 
+
+app.patch("/api/UpdateProfile",function(req,res,)
+{
+    mongoClient.connect(CONNECTIONSTRING, CONNECTIONOPTIONS, function (err, client) {
+        if (err) {
+            res.status(503).send("Errore connessione al DB");
+        }
+        else 
+        {
+            let db = client.db(DBNAME);
+            let collection = db.collection("utente");
+            let currentID = req.payload["_id"];  //id dell'utente loggato
+            let json = req.body; // mi da il JSON completo, che il client ha mandato
+            json["_id"]= ObjectId(currentId); //così manteniamo il vecchio ID
+            collection.replaceOne({"_id":ObjectID(currentId)},json, function (err, data) {
+                if (err) {
+                    res.status(500).send("Errore cancellazione record\n" + err.message);
+                }
+                else 
+                {
+                    res.send(data);
+                }
+                client.close();
+            });
+        }    
+    })
+});
 /********** Route di gestione degli errori **********/
 
 
