@@ -1,0 +1,103 @@
+<%- include ("includes/header") %>
+
+<section>
+	<div class="gap gray-bg">
+		<div class="container-fluid">
+
+			<div class="row">
+				<div class="offset-md-3 col-md-6">
+					<div class="timeline-info">
+						<ul class="nav nav-tabs">
+							<li>
+								<a class="active" data-toggle="tab" href="#people">Persone</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="row" id="page-contents">
+
+						<div class="col-md-3"></div>
+
+						<div class="col-md-6">
+							<div class="central-meta">
+								<div class="frnds">
+
+									<div class="tab-content">
+										<div class="tab-pane active fade show" id="people">
+											<ul class="nearby-contct" id="search-results"></ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-3"></div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<input type="hidden" id="query" value="<%= query %>">
+
+<script>
+	var isSearchResults = true;
+
+	function showSearchResults() {
+		var ajax = new XMLHttpRequest();
+		ajax.open("POST", "/search", true);
+
+		ajax.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+
+				var response = JSON.parse(this.responseText);
+
+				if (response.status == "success") {
+
+					var html = "";
+					for (var a = 0; a < response.data.length; a++) {
+						var data = response.data[a];
+
+						if (data._id == window.user._id) {
+							continue;
+						}
+
+						html += '<li>';
+							html += '<div class="nearly-pepls">';
+								html += '<figure>';
+									html += '<a href="/user/' + data.username + '">';
+										html += '<img src="' + mainURL + '/' + data.profileImage + '">';
+									html += '</a>';
+								html += '</figure>';
+
+								html += '<div class="pepl-info">';
+									html += '<h4>';
+										html += '<a href="/user/' + data.username + '">' + data.name + '</a>';
+									html += '</h4>';
+
+								html += '</div>';
+							html += '</div>';
+						html += '</li>';
+					}
+
+					document.getElementById("search-results").innerHTML = html;
+
+				} else {
+					alert(response.message);
+				}
+			}
+		};
+
+		var formData = new FormData();
+		formData.append("query", document.getElementById("query").value);
+		ajax.send(formData);
+	}
+</script>
+
+<%- include ("includes/footer") %>

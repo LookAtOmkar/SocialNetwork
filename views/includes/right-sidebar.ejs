@@ -1,0 +1,85 @@
+<aside class="sidebar static">
+	<div class="widget">
+		<h4 class="widget-title">Chat</h4>
+		<i class="fas fa-user ml-3 mb-2"> Users</i>
+		<div style="height: 250px; overflow: auto;" class="users">
+			<div class="d-flex bd-highlight user">
+				<div class=" ml-2" >
+					<img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle " style="border: 1.5px solid rgb(172, 248, 141);" height="45" width="45">
+					<span class="online_icon offline"></span>
+				</div>
+				<div class=" mx-auto ml-3">
+					<span>Nargis Hawa</span>
+				</div>
+			</div>
+		</div>
+		<a href="/chat" class="btn btn-primary stretched-link float-right">Click to Message </a>
+	</div>
+</aside>
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+<script src="/public/js/jquery-3.3.1.min.js"></script>
+<script src="/public/js/libreria.js"></script> <!--Non riesce a vedere la libreria-->
+<script src="/public/js/script.js"></script>
+<script src="/public/js/main.min.js"></script>
+<script src="/public/js/socket.io.js"></script>
+
+
+<script>
+
+	//Get users 
+	let request = $.ajax({
+        url: "/getUsers_Chat", //default: currentPage
+        type: "GET",
+        data: {},
+        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+        dataType: "json",
+		timeout: 5000,
+	});
+
+	let Users = $(".users");
+
+	request.fail(errore);
+	request.done(function(data){
+		//console.log(data);
+		for(let user of data.data)
+		{
+			//console.log(user);
+				let userDiv = $("<div>").addClass("d-flex bd-highlight user");
+				let iconDiv = $("<div>").addClass("ml-2");
+				let srcImg;
+				if(user.profileImage =="")
+					srcImg = "public/images/1611091040043-ilmioacc.jpg";
+				else   
+					srcImg = user.profileImage;
+				let img = $("<img>").prop("src",srcImg).addClass("rounded-circle").css({
+					"border": "1.5px solid rgb(172, 248, 141)",
+					"height":"45",
+					"width":"45",
+				});
+				let _span = $("<span>").addClass("online_icon offline");
+				img.appendTo(iconDiv);
+				_span.appendTo(iconDiv);
+				
+				let nameDiv = $("<div>").addClass("mx-auto ml-3");
+				let _name = $("<span>").html(user.username);
+				_name.appendTo(nameDiv);
+				iconDiv.appendTo(userDiv);
+				nameDiv.appendTo(userDiv);
+				userDiv.appendTo(Users);
+		}
+	});
+
+
+	
+	function errore(jqXHR, testStatus, strError) {
+		if (jqXHR.status == 0)
+			alert("Connection refused or Server timeout");
+		else if (jqXHR.status == 200)
+			alert("Formato dei dati non corretto : " + jqXHR.responseText);
+		else
+			alert("Server Error: " + jqXHR.status + " - " + jqXHR.responseText);
+	}
+
+</script>

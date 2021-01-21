@@ -1,0 +1,185 @@
+<%- include ("includes/header") %>
+<style>
+    .user:hover{
+        animation-name: div_user;
+        background-color: #009EE3;
+        animation-duration: 1s;
+        color:white;
+        font-weight: bold;
+    }
+    @keyframes div_user {
+        from{background-color: white;}
+        to{background-color: #009ee3;}        
+    }
+
+</style>
+<section>
+	<!---------------------------------------------------CONTENT---------------------------------->
+	<div class="row ml-5  mt-4">
+		<!--Aside= All Users and Rooms-->
+		<div class="col-md-4 col-xl-3  mr-5" style="border:2px solid #009EE3; border-radius: 10%; height:500px;" >
+			<div class="card-body  mb-sm-3 mb-md-0  users">
+				<h3>Users</h3>
+				<div class="d-flex bd-highlight user mt-2" id="Nargis_Hawa" style="border-bottom: 1px solid #009EE3; ">
+					<div>
+						<img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle" style="border: 1.5px solid rgb(3, 175, 255);" height="45" width="45">
+					</div>
+					<div class=" mx-auto ml-3">
+						<span>Nargis Hawa</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!---->
+
+		<div id="wrapper" class="col-xl-8" style="height:500px; border: 2px double #009EE3; box-shadow:4px 8px #009EE3; border-radius: 2%;">
+			<!-- Qui verranno visualizzati i messaggi provenienti dagli utenti -->
+		</div>
+		<div class="col-sm-1"></div>
+		<div class="container-fluid d-flex flex-row p-0 mt-4">
+			<div class="col-sm-3"></div>
+			<div class="col-sm-6 ml-4 ">
+				<input type="email" class="form-control" id="txtMessage" placeholder="Inserisci qui il tuo messaggio">
+			</div>
+			<div class="col-sm-3 p-0 mb-4" >
+				<button class="	btn btn-success fa fa-paper-plane mr-3" id="btnInvia">Send</button>
+				<button class="	btn btn-primary fas fa-sign-out-alt">Disconnect</button>
+			</div>
+		</div>
+	</div>
+</section>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+<script src="/public/js/jquery-3.3.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script src="/public/js/libreria.js"></script>
+<script src="/public/js/script.js"></script>
+<script src="/public/js/main.min.js"></script>
+<script src="/public/js/socket.io.js"></script>
+
+
+<script>
+
+
+    //Get users 
+	let request = $.ajax({
+        url: "/getUsers_Chat", //default: currentPage
+        type: "GET",
+        data: {},
+        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+        dataType: "json",
+		timeout: 5000,
+	});
+
+	let Users = $(".users");
+
+    request.fail(errore);
+    request.done(function(data){
+        for(let userData of data.data)
+        {
+            let _user = $("<div>").addClass("d-flex bd-highlight user mt-2").prop("id",userData.username).css({
+                "border-bottom": "1px solid #009EE3"
+            });
+            let srcImg;
+            if(userData.profileImage == '')
+                srcImg = "public/images/1611091040043-ilmioacc.jpg";
+            else
+                srcImg = userData.profileImage;
+            let logo = $("<img>").prop("src",srcImg).addClass("rounded-circle").css({
+                "border": "1.5px solid rgb(3, 175, 255);",
+                "height":"45",
+                "width":"45",
+                "object-fit":"cover"
+            }).appendTo($("<div>"));
+            let name =$("<span>").addClass("mx-auto ml-3").prop("id",userData.username).html(userData.username).appendTo($("<div>"));
+            logo.appendTo(_user);
+            name.appendTo(_user);
+            _user.appendTo(Users);
+        }
+    })
+
+
+    let socket = io.connect();
+    console.log("socket: " + socket);
+   
+
+    let username = "ME";
+    socket.on('connect', function () {
+        let person_name;
+            // 1) invio username
+            socket.emit("username", username);
+
+            $(".users").on("click","div",function(){
+                person_name = $(this).prop("id");
+            });
+
+            // 2) invio mesaggio
+            $("#btnInvia").click(function () {
+                let msg = $("#txtMessage").val();
+                socket.emit("message",{
+                    "sender":username,
+                    "msg":msg
+                });
+            });
+
+            // 3) disconnessione
+            $("#btnDisconnetti").click(function () {
+                socket.disconnect();
+            });
+    });
+
+
+    socket.on('notify_message', function (data) {
+            // ricezione di un messaggio dal server			
+            data = JSON.parse(data);
+            visualizza(data.from, data.message, data.date);
+        });
+
+        /*
+        socket.on('userNOK', function () {
+            alert("Nome già esistente!");
+            let username = prompt("Inserisci lo username:");
+            socket.emit("username",username);
+        });
+        */
+
+    socket.on('disconnect', function () {
+            alert("Sei stato disconnesso!");
+            //window.location.href="index.html"; //PAGINA PRINCIPALE
+        });
+
+
+
+        //FUNCTIONS
+
+     function visualizza(username, message, date) {
+            let wrapper = $("#wrapper")
+            let container = $("<div class='message-container mt-2' style=' background-color: rgb(127, 207, 240); border-radius:3%; width:50%'></div>");
+            container.appendTo(wrapper);
+
+            // username e date
+            date = new Date(date);
+            let mittente = $("<small class='message-from'>" + username + " @" + date.toLocaleTimeString() + "</small>");
+            mittente.appendTo(container);
+
+            // messaggio
+            message = $("<h6 class='message-data text-white'>" + message + "</h6>");
+            message.appendTo(container);
+
+
+            // auto-scroll dei messaggi
+            /* la proprietà html scrollHeight rappresenta l'altezza di wrapper oppure
+            l'altezza del testo interno qualora questo ecceda l'altezza di wrapper */
+            let h = wrapper.get(0).scrollHeight;
+            // fa scorrere il teso verso l'alto
+            wrapper.animate({ scrollTop: h }, 500);
+        }
+
+
+</script>
