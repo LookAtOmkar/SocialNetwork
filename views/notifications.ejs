@@ -43,10 +43,10 @@
 			html += '<li>';
 				if (data.type == "new_comment" || data.type == "photo_liked")
 				{
-					html += "<a href='/post/" + data.post._id + "'>";
+					html += "<a>";
 				}
 					html += '<figure><img src="' + mainURL + '/' + data.profileImage + '" style="width: 45px; height: 45px; object-fit: cover;"></figure>';
-					html += '<div class="notifi-meta">';
+					html += '<div class="notifi-meta" disabled = "disabled" >';
 						html += '<p>' + data.content + '</p>';
 
 						var createdAt = new Date(data.createdAt);
